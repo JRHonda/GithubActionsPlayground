@@ -32,3 +32,23 @@ jobs:
       - name: Print out favorite dog type
         run: |
           echo "My favorite dob is a ${{ vars.FAVORITE_DOG_TYPE }}"
+          
+  STAGING:
+    runs-on: ubuntu-latest
+    environment: staging
+    needs: DEV_DISTRIBUTION
+
+    steps:
+      - name: Print out BUILD_PROPERTIES
+        run: |
+          echo "Build properties for dev are -> "${{ env.BUILD_PROPERTIES }}""
+
+      - name: Get repo build.properties from secrets
+        run: echo "${{secrets.BUILD_PROPERTIES}}" > $GITHUB_WORKSPACE/build.properties
+
+      - name: Get env build.properties from secrets
+        run: echo "${{env.BUILD_PROPERTIES}}" > $GITHUB_WORKSPACE/build.properties
+
+      - name: Print out favorite dog type
+        run: |
+          echo "My favorite dob is a ${{ vars.FAVORITE_DOG_TYPE }}"
