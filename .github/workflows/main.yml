@@ -21,8 +21,8 @@ jobs:
 
       - name: Print out BUILD_PROPERTIES
         run: |
-          echo "Build properties for dev are -> ${{env.secrets.BUILD_PROPERTIES}}"
+          echo "Build properties for dev are -> "${{ env.BUILD_PROPERTIES }}""
 
       - name: Print out favorite dog type
         run: |
-          echo "My favorite dob is a ${{env.FAVORITE_DOG_TYPE}}"
+          echo "My favorite dob is a ${{ vars.FAVORITE_DOG_TYPE }}"
