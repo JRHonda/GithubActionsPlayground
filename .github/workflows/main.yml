@@ -32,6 +32,15 @@ jobs:
       - name: Print out favorite dog type
         run: |
           echo "My favorite dob is a ${{ vars.FAVORITE_DOG_TYPE }}"
+
+      - name: Create build properties
+        run: |
+          echo "KEY_ONE=\"${{vars.KEY_ONE}}\"" > $GITHUB_WORKSPACE/build.properties
+          echo "KEY_TWO=\"${{vars.KEY_TWO}}\"" > $GITHUB_WORKSPACE/build.properties
+          echo "KEY_THREE=\"${{vars.KEY_THREE}}\"" > $GITHUB_WORKSPACE/build.properties
+
+      - name: Print out build.properties
+        run: cat $GITHUB_WORKSPACE/build.properties
           
   STAGING:
     runs-on: ubuntu-latest
