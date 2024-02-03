@@ -66,12 +66,13 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add app/build.gradle.kts
           git checkout -- .
-          git commit -m "Update VERSION_CODE for run id ${{ github.run_id }}"
+          git commit -m "Update VERSION_CODE for run id ${{github.run_id}}"
           git push origin $VERSION_CODE_UPDATE_BRANCH_NAME
 
       - name: Create pull request
         run: |
-          gh pr create --base development --head $VERSION_CODE_UPDATE_BRANCH_NAME --title "Update VERSION_CODE for run ID ${{ github.run_id }}" --body "Automated PR created by GitHub Actions"
+          COMMIT_MESSAGE="Update VERSION_CODE for run ID ${{github.run_id}}"
+          gh pr create --base development --head $VERSION_CODE_UPDATE_BRANCH_NAME --title $COMMIT_MESSAGE --body "Automated PR created by GitHub Actions"
           
   STAGING:
     runs-on: ubuntu-latest
