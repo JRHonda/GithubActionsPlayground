@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 jobs:
   DEV_DISTRIBUTION:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     environment: dev
 
     steps:
