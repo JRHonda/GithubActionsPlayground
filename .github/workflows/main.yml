@@ -41,6 +41,11 @@ jobs:
           VERSION_CODE=$(date "+%Y%m%d %H:%M")
           echo "VERSION_CODE=\"$VERSION_CODE\"" >> $GITHUB_WORKSPACE/build.properties
 
+      - name: Print out run id
+        run: |
+          version_code_update_branch_id=${{ github.run_id }}
+          echo "Ruun id -> $version_code_update_branch_id"
+
       - name: Print out build.properties
         run: cat $GITHUB_WORKSPACE/build.properties
           
