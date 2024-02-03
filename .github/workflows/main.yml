@@ -48,8 +48,8 @@ jobs:
 
       - name: Create the version-code-update branch
         run: |
-          git switch -c $version_code_update_branch_name
-          git push origin $version_code_update_branch_name
+          git switch -c ${version_code_update_branch_name}
+          git push origin ${version_code_update_branch_name}
 
       - name: Update VERSION_CODE based on current date
         run: |
@@ -66,14 +66,14 @@ jobs:
           git commit -m "Update VERSION_CODE based on current date"
 
       - name: Push changes
-        run: git push origin $version_code_update_branch_name
+        run: git push origin ${version_code_update_branch_name}
 
       - name: Create pull request
         run: |
-          gh pr create --base development --head $version_code_update_branch_name --title "Update VERSION_CODE for run ID ${{ github.run_id }}" --body "Automated PR created by GitHub Actions"
+          gh pr create --base development --head ${version_code_update_branch_name} --title "Update VERSION_CODE for run ID ${{ github.run_id }}" --body "Automated PR created by GitHub Actions"
           
   STAGING:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     environment: staging
     needs: DEV_DISTRIBUTION
 
