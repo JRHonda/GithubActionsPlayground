@@ -48,7 +48,7 @@ jobs:
 
       - name: Create the version-code-update branch
         run: |
-          git checkout -b $version_code_update_branch_name
+          git switch -c $version_code_update_branch_name
           git push origin $version_code_update_branch_name
 
       - name: Update VERSION_CODE based on current date
