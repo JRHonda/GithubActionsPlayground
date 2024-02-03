@@ -48,7 +48,7 @@ jobs:
           VERSION_CODE_UPDATE_BRANCH_NAME=version-code-update/${{ github.run_id }}
           echo "Branch name -> $VERSION_CODE_UPDATE_BRANCH_NAME"
           git switch -c $VERSION_CODE_UPDATE_BRANCH_NAME
-          git push origin VERSION_CODE_UPDATE_BRANCH_NAME
+          git push origin $VERSION_CODE_UPDATE_BRANCH_NAME
 
      # - name: Create the version-code-update branch
         #run: |
@@ -67,7 +67,7 @@ jobs:
           git config --local user.name "GitHub Actions"
           git add app/build.gradle
           git checkout -- .
-          git commit -m "Update VERSION_CODE based on current date"
+          git commit -m "Update VERSION_CODE for run id ${{ github.run_id }}"
 
       - name: Push changes
         run: git push origin $VERSION_CODE_UPDATE_BRANCH_NAME
