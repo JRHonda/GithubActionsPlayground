@@ -58,7 +58,7 @@ jobs:
         run: |
           compact_month=$(date "+%m" | sed 's/^0//')
           version_code=$(date "+$compact_month%d%Y%H%M")
-          sed -i.bak "s/versionCode [0-9]\+/versionCode $version_code/" app/build.gradle.kts
+          sed -i "s/versionCode [0-9]\+/versionCode $version_code/" app/build.gradle.kts
 
       - name: Commit changes
         run: |
@@ -68,9 +68,7 @@ jobs:
           git add app/build.gradle.kts
           git checkout -- .
           git commit -m "Update VERSION_CODE for run id ${{ github.run_id }}"
-
-      - name: Push changes
-        run: git push origin $VERSION_CODE_UPDATE_BRANCH_NAME
+          git push origin $VERSION_CODE_UPDATE_BRANCH_NAME
 
       - name: Create pull request
         run: |
