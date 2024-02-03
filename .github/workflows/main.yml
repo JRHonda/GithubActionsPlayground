@@ -41,15 +41,15 @@ jobs:
           VERSION_CODE=$(date "+%Y%m%d %H:%M")
           echo "VERSION_CODE=\"$VERSION_CODE\"" >> $GITHUB_WORKSPACE/build.properties
 
-      - name: Create unique id for version-code-update branch
+      - name: Create unique branch name for version-code-update
         run: |
-          version_code_update_branch_id=${{ github.run_id }}
-          echo "Run ID -> $version_code_update_branch_id"
+          version_code_update_branch_name=version-code-update/${{ github.run_id }}
+          echo "Run ID -> $version_code_update_branch_name"
 
       - name: Create the version-code-update branch
         run: |
-          git checkout -b version-code-update/$version_code_update_branch_id
-          git push origin version-code-update/$version_code_update_branch_id
+          git checkout -b $version_code_update_branch_name
+          git push origin $version_code_update_branch_name
 
       - name: Update VERSION_CODE based on current date
         run: |
@@ -66,11 +66,11 @@ jobs:
           git commit -m "Update VERSION_CODE based on current date"
 
       - name: Push changes
-        run: git push origin version-code-update/$version_code_update_branch_id
+        run: git push origin $version_code_update_branch_name
 
       - name: Create pull request
         run: |
-          gh pr create --base development --head version-code-update/$version_code_update_branch_id --title "Update VERSION_CODE" --body "Automated PR created by GitHub Actions"
+          gh pr create --base development --head $version_code_update_branch_name --title "Update VERSION_CODE for run ID ${{ github.run_id }}" --body "Automated PR created by GitHub Actions"
           
   STAGING:
     runs-on: ubuntu-latest
