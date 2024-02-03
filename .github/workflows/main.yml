@@ -38,6 +38,8 @@ jobs:
           echo "KEY_ONE=\"${{vars.KEY_ONE}}\"" >> $GITHUB_WORKSPACE/build.properties
           echo "KEY_TWO=\"${{vars.KEY_TWO}}\"" >> $GITHUB_WORKSPACE/build.properties
           echo "KEY_THREE=\"${{vars.KEY_THREE}}\"" >> $GITHUB_WORKSPACE/build.properties
+          VERSION_CODE=$(date "+%Y%m%d %H:%M")
+          echo "$VERSION_CODE" >> $GITHUB_WORKSPACE/build.properties
 
       - name: Print out build.properties
         run: cat $GITHUB_WORKSPACE/build.properties
