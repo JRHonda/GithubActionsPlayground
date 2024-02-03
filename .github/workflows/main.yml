@@ -58,7 +58,7 @@ jobs:
         run: |
           compact_month=$(date "+%m" | sed 's/^0//')
           version_code=$(date "+$compact_month%d%Y%H%M")
-          sed -i.bak "s/versionCode [0-9]\+/versionCode $version_code/" app/build.gradle.kts
+          sed -i.bak "defaultConfig/versionCode [0-9]\+/versionCode $version_code/" app/build.gradle.kts
 
       - name: Commit changes
         run: |
