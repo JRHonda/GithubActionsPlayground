@@ -4,7 +4,7 @@ on: workflow_dispatch
 
 jobs:
   DEV_DISTRIBUTION:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     environment: dev
     env:
       GH_TOKEN: ${{ github.token }}
@@ -80,7 +80,7 @@ jobs:
           gh pr create --base development --head $BRANCH_HEAD --title "Update VERSION_CODE for run ID $RUN_ID" --body "Automated PR created by GitHub Actions"
           
   STAGING:
-    runs-on: ubuntu-latest
+    runs-on: macos-14
     environment: staging
     needs: DEV_DISTRIBUTION
 
