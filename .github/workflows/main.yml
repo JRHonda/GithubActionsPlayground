@@ -70,11 +70,12 @@ jobs:
           git push origin $VERSION_CODE_UPDATE_BRANCH_NAME
 
       - name: Create pull request
-        run: |
-          RUN_ID=${{github.run_id}}
-          BRANCH_HEAD=version-code-update/${{github.run_id}}
-          gh pr create --base development --head $BRANCH_HEAD
-          #--title "UpdateVERSION_CODE$RUN_ID" --body "Automated PR created by GitHub Actions"
+        uses: actions/github-script@v5
+        with: 
+          script:
+            RUN_ID=${{github.run_id}}
+            BRANCH_HEAD=version-code-update/${{github.run_id}}
+            gh pr create --base development --head $BRANCH_HEAD --title "Update VERSION_CODE for run ID $RUN_ID" --body "Automated PR created by GitHub Actions"
           
   STAGING:
     runs-on: ubuntu-latest
