@@ -8,13 +8,13 @@ jobs:
     environment: dev
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Set up JDK 18
-        uses: actions/setup-java@v3
-        with:
-          java-version: '18'
-          distribution: 'temurin'
-          cache: gradle
+      #- uses: actions/checkout@v3
+      #- name: Set up JDK 18
+        #uses: actions/setup-java@v3
+        #with:
+          #java-version: '18'
+          #distribution: 'temurin'
+          #cache: gradle
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -43,13 +43,15 @@ jobs:
 
       - name: Create unique branch name for version-code-update
         run: |
-          version_code_update_branch_name=version-code-update/${{ github.run_id }}
-          echo "Run ID -> $version_code_update_branch_name"
+          VERSION_CODE_UPDATE_BRANCH_NAME=version-code-update/${{ github.run_id }}
+          echo "Branch name -> $VERSION_CODE_UPDATE_BRANCH_NAME"
+          git switch -c $VERSION_CODE_UPDATE_BRANCH_NAME
+          git push origin VERSION_CODE_UPDATE_BRANCH_NAME
 
-      - name: Create the version-code-update branch
-        run: |
-          git switch -c ${version_code_update_branch_name}
-          git push origin ${version_code_update_branch_name}
+     # - name: Create the version-code-update branch
+        #run: |
+          #git switch -c $VERSION_CODE_UPDATE_BRANCH_NAME
+          #git push origin VERSION_CODE_UPDATE_BRANCH_NAME
 
       - name: Update VERSION_CODE based on current date
         run: |
@@ -66,11 +68,11 @@ jobs:
           git commit -m "Update VERSION_CODE based on current date"
 
       - name: Push changes
-        run: git push origin ${version_code_update_branch_name}
+        run: git push origin $VERSION_CODE_UPDATE_BRANCH_NAME
 
       - name: Create pull request
         run: |
-          gh pr create --base development --head ${version_code_update_branch_name} --title "Update VERSION_CODE for run ID ${{ github.run_id }}" --body "Automated PR created by GitHub Actions"
+          gh pr create --base development --head $VERSION_CODE_UPDATE_BRANCH_NAME --title "Update VERSION_CODE for run ID ${{ github.run_id }}" --body "Automated PR created by GitHub Actions"
           
   STAGING:
     runs-on: macos-14
