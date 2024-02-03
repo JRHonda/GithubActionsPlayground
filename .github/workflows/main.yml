@@ -4,6 +4,8 @@ on: workflow_dispatch
 
 jobs:
   DEV_DISTRIBUTION:
+    permissions:
+      pull-requests: write-all
     runs-on: macos-14
     environment: dev
     env:
