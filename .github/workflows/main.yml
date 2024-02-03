@@ -59,7 +59,9 @@ jobs:
       - name: Update VERSION_CODE based on current date
         run: |
           compact_month=$(date "+%m" | sed 's/^0//')
-          version_code=$(date "+$compact_month%d%Y%H%M")
+          current_year=$(date "+%Y")
+          last_two_digits=${current_year:2:2}
+          version_code=$(date "+$compact_month%d$last_two_digits%H%M")
           sed -i.bak "s/versionCode = [0-9]/versionCode = $version_code/" app/build.gradle.kts
 
       - name: Commit changes
