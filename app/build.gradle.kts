@@ -11,7 +11,7 @@ android {
         applicationId = "com.lagunalabs.githubactionsplayground"
         minSdk = 31
         targetSdk = 34
-        versionCode = 1
+        versionCode = 20320240553
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
