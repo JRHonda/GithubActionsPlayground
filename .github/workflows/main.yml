@@ -51,9 +51,6 @@ jobs:
         run: |
           VERSION_CODE_UPDATE_BRANCH_NAME=version-code-update/${{ github.run_id }}
           echo "Branch name -> $VERSION_CODE_UPDATE_BRANCH_NAME"
-
-      - name: Create the version-code-update branch
-        run: |
           git switch -c $VERSION_CODE_UPDATE_BRANCH_NAME
           git push origin VERSION_CODE_UPDATE_BRANCH_NAME
 
