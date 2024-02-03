@@ -49,7 +49,7 @@ jobs:
 
       - name: Create unique branch name for version-code-update
         run: |
-          VERSION_CODE_UPDATE_BRANCH_NAME=version-code-update/${{ github.run_id }}
+          VERSION_CODE_UPDATE_BRANCH_NAME=version-code-update/${{github.run_id}}
           echo "Branch name -> $VERSION_CODE_UPDATE_BRANCH_NAME"
           git switch -c $VERSION_CODE_UPDATE_BRANCH_NAME
           git push --set-upstream origin $VERSION_CODE_UPDATE_BRANCH_NAME
@@ -72,7 +72,8 @@ jobs:
       - name: Create pull request
         run: |
           RUN_ID=${{github.run_id}}
-          gh pr create --base development --head $VERSION_CODE_UPDATE_BRANCH_NAME 
+          BRANCH_HEAD=version-code-update/${{github.run_id}}
+          gh pr create --base development --head $BRANCH_HEAD
           #--title "UpdateVERSION_CODE$RUN_ID" --body "Automated PR created by GitHub Actions"
           
   STAGING:
