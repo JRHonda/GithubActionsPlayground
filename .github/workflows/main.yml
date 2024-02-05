@@ -6,7 +6,7 @@ permissions: write-all
 
 jobs:
   DEV_DISTRIBUTION:
-    runs-on: macos-14
+    runs-on: ubuntu-latest
     environment: dev
     env:
       GH_TOKEN: ${{ github.token }}
@@ -82,7 +82,7 @@ jobs:
           gh pr create --base development --head $BRANCH_HEAD --title "Update VERSION_CODE for run ID $RUN_ID" --body "Automated PR created by GitHub Actions"
           
   STAGING:
-    runs-on: macos-14
+    runs-on: ubuntu-latest
     environment: staging
     needs: DEV_DISTRIBUTION
 
