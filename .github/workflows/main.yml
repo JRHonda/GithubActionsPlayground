@@ -1,6 +1,16 @@
 name: Test environments
 
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      customParam:
+        description: 'Custom input parameter with choices'
+        required: true
+        default: 'default-value' # You can provide a default value if needed
+        # Define a list of options for the input
+        # Use a comma-separated list of values or an array
+        # choices: 'option1,option2,option3'
+        options: ['option1', 'option2', 'option3']
 
 permissions: write-all
 
