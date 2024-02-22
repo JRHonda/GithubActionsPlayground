@@ -7,11 +7,9 @@ on:
         type: choice
         description: 'Custom input parameter with choices'
         required: true
-        default: 'app' # You can provide a default value if needed
         options: 
+          - 'app'
           - 'fanaticscollect'
-          - 'option2'
-          - 'option3'
 
 permissions: write-all
 
